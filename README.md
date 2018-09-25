@@ -56,7 +56,7 @@ rm -rf /www
 
 ng build --prod --base-href . --output-path ../HelloCordovaMobileApp/www/
 
-<script type=”text/javascript” src=”cordova.js”></script>
+<script type="text/javascript" src="cordova.js"></script>
 
 const bootstrap = () => {
   platformBrowserDynamic().bootstrapModule(AppModule);
@@ -70,18 +70,16 @@ if (typeof window['cordova'] !== 'undefined') {
   bootstrap();
 }
 
-cordova platform add android
-cordova run android
+Adicionando os plugins ao projeto
+cordova plugin add cordova-plugin-barcodescanner
+cordova plugin add cordova-plugin-camera
+cordova plugin add cordova-plugin-geolocation
+
 
 ng g service Cordova
 
-
-
-import { Injectable,NgZone } from '@angular/core';
-import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/operator/map';
-import { BehaviorSubject, Observable, Observer } from 'rxjs';
-import { fromEvent } from 'rxjs';
+import { Injectable, NgZone } from '@angular/core';
+import { BehaviorSubject, fromEvent, Observable, Observer } from 'rxjs';
 
 
 function _window(): any {
@@ -168,3 +166,14 @@ export class CordovaService {
         }
     }
 }
+
+providers: [
+  ...
+   CordovaService
+  ...
+],
+
+
+Teste:
+cordova platform add android@6.3.0
+cordova run android

@@ -8,9 +8,9 @@
     [opened]="!(isHandset$ | async)">
     <mat-toolbar color="primary">Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item [routerLink]="['/camera']">camera 1</a>
-      <a mat-list-item [routerLink]="['/geolocation']">geolocation 2</a>
-      <a mat-list-item [routerLink]="['/codebar']">codebar 3</a>
+      <a mat-list-item (click)="drawer.toggle()" [routerLink]="['/camera']">camera 1</a>
+      <a mat-list-item (click)="drawer.toggle()" [routerLink]="['/geolocation']">geolocation 2</a>
+      <a mat-list-item (click)="drawer.toggle()" [routerLink]="['/codebar']">codebar 3</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -23,7 +23,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>HelloCordova</span>
+      <span>Pesquisa Teste</span>
     </mat-toolbar>
     <!-- Add Content Here -->
     <router-outlet></router-outlet>

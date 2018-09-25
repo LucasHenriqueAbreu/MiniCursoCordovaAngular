@@ -18,5 +18,6 @@ if (typeof window['cordova'] !== 'undefined') {
     bootstrap();
   }, false);
 } else {
+  alert('Cordova não esta disponível')
   bootstrap();
 }

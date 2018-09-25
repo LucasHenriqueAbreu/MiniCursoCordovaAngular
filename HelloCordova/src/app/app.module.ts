@@ -10,6 +10,7 @@ import { ROUTES } from './app.routes';
 import { CameraComponent } from './camera/camera.component';
 import { GeolocationComponent } from './geolocation/geolocation.component';
 import { CodebarComponent } from './codebar/codebar.component';
+import { CordovaService } from './cordova.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { CodebarComponent } from './codebar/codebar.component';
     MatListModule,
     ROUTES
   ],
-  providers: [],
+  providers: [CordovaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

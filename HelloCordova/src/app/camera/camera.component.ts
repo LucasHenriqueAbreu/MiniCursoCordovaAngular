@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CordovaService } from '../cordova.service';
 
 @Component({
   selector: 'app-camera',
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./camera.component.css']
 })
 export class CameraComponent implements OnInit {
-
-  constructor() { }
+  image: string;
+  constructor(
+    private cordovaService: CordovaService
+  ) { }
 
   ngOnInit() {
+  }
+
+  openCamera() {
+    this.cordovaService.openCamera().subscribe(res => {
+      this.image = res;
+    }, err => alert(err));
   }
 
 }

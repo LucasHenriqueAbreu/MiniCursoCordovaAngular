@@ -1,3 +1,10 @@
+Como você deve ter visto, o Cordova permite criar aplicações híbridas para diferentes plataformas mobile com base no componente WebView. 
+Este funciona como um browser, mas sem aquela barra de endereço ou botões para o usuário. Por ele apenas visualizamos os dados.
+
+O Cordova usa apenas HTML, CSS e JavaScript, então o desenvolvedor web que já utiliza essas linguagens pode aproveitar todo o conhecimento e alcançar novos públicos,
+pois suas aplicações usarão recursos nativos dos dispositivos mobile, como ilustrado na Figura 1.
+
+
 1 Criando o projeto Angular
 ng new HellowCordova
 
@@ -174,3 +181,68 @@ providers: [
 Teste:
 cordova platform add android@6.3.0
 cordova run android
+
+
+
+PWA ---
+PWA, de forma curta e grossa, são técnicas de desenvolvimento que combinam o que tem de melhor em aplicações Web e o melhor dos aplicativos. O usuário não tem a necessidade de realizar uma instalação. Quanto mais o app é acessado pelo usuário, ele se torna mais rápido mesmo utilizando a rede de dados móveis que às vezes não funciona direito. É possível enviar notificações, possui atalho na home e é carregado como um aplicativo.
+
+
+Progressivo — É possível ser acessado em qualquer dispositivo e qualquer navegador, este é um princípio fundamental.
+Responsivo -Deve ser possível utilizar em qualquer tamanho: desktop, celular, tablet.
+Independente de conectividade — Utilizando dos service workers para trabalhar off-line ou em redes de baixa qualidade.
+Semelhante a aplicativos — Deve ser famíliarizado, parecer com aplicativos, com interações e navegação de estilo de aplicativos, utilizando o modelo de shell de aplicativo.
+Atual — O service worker possui um processo de atualização muito importante que deve ser utilizado.
+Seguro — Sempre deve ser utilizado certificados HTTPS, garantindo a segurança das informações.
+Descobrível — Utilizando os manifestos do W3C e o escopo de registro do service worker, é possível ser encontrado por mecanismos de pesquisa que podem identificar a aplicação como “aplicativo”
+Reenvolvente — É possível utilizar notificações para engajar o uso.
+Instalável — Podem ser armazenados na home do usuário para facilitação no acesso.
+Linkável — Compartilhável via URL, não requer instalação complexa.
+
+
+Segurança
+
+git add .
+git commit -m "Commit inicial"
+git remote add origin https://github.com/{usuário}/{nome do repositório}.git
+git push origin master
+
+ng build --prod --base-href /HelloCordovaMobileApp/
+
+npm i -g angular-cli-ghpage
+ngh
+
+Shell
+<noscript>
+  <h3 style="color:#3f51b5; font-family: Helvetica; margin: 2rem;">
+      Aplicativo indisponível sem javascript.
+  </h3>
+</noscript>
+
+O manifesto:
+Ter uma presença avançada na tela inicial do Android do usuário
+Ser iniciado no modo de tela inteira no Android sem uma barra de URL
+Controlar a orientação da tela para proporcionar uma visualização ideal
+Definir uma experiência de inicialização com “tela de apresentação” e uma cor de tem para o site
+Acompanhar se o aplicativo foi iniciado da tela inicial ou da barra de URL
+
+Service Worker
+
+
+ng add  @angular/pwa --project HelloCordovaMobileApp
+
+// package.json
+...
+"@angular/service-worker": "6.0.0",
+...
+
+// src/app/app.module.ts
+...
+ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
+...
+
+// index.html
+...
+  <meta name="theme-color" content="#3f51b5">
+  <link rel="manifest" href="manifest.json">
+...

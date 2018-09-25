@@ -1,15 +1,21 @@
+1 Criando o projeto Angular
 ng new HellowCordova
 
+2 Adicionando o framework de design angular material
 ng add @angular/material
 
+3 Criando um navbar
 ng generate @angular/material:material-nav --name myNav
 
-<my-nav></my-nav>
+4 Adicionando o no componente principal
+<app-my-nav></app-my-nav>
 
+5 Criando os outros 3 componentes
 ng g c camera
 ng g c geolocation
 ng g c codebar
 
+6 Criando o arquivo de rotas
 touch app.routes.ts
 
 import { ModuleWithProviders } from "@angular/compiler/src/core";
@@ -23,15 +29,19 @@ const routes: Routes = [
 
 export const ROUTES: ModuleWithProviders = RouterModule.forRoot(routes, { useHash: true });
 
+8 Importar o arquivo de rotas no modulo principal do projeto.
+
 imports: [
   ...
    ROUTES
   ...
 ],
-
+9 Chamada das telas.
 <a mat-list-item [routerLink]="['/camera']">camera 1</a>
 <a mat-list-item [routerLink]="['/geolocation']">geolocation 2</a>
 <a mat-list-item [routerLink]="['/codebar']">codebar 3</a>
+...
+<router-outlet></router-outlet>
 
 --->> Cordova
 
@@ -66,12 +76,13 @@ cordova run android
 ng g service Cordova
 
 
-import { Injectable,NgZone } from ‘@angular/core’;
-import { Subject } from 'rxjs/Subject';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
+
+import { Injectable,NgZone } from '@angular/core';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/map';
+import { BehaviorSubject, Observable, Observer } from 'rxjs';
+import { fromEvent } from 'rxjs';
+
 
 function _window(): any {
  // return the global native browser window object
@@ -83,7 +94,7 @@ export class CordovaService {
     private resume: BehaviorSubject<boolean>;
     constructor(private zone: NgZone) {
         this.resume = new BehaviorSubject<boolean>(null);
-        Observable.fromEvent(document, 'resume').subscribe(event => {
+        fromEvent(document, 'resume').subscribe(event => {
             this.zone.run(() => {
                 this.onResume();
             });
@@ -103,7 +114,7 @@ export class CordovaService {
 
     public openScanner(): Observable<any> {
         return Observable.create((observer: Observer<string>) => {
-        window.cordova.plugins.barcodeScanner.scan(
+        _window().cordova.plugins.barcodeScanner.scan(
             function (result) {
             observer.next(result);
             },
@@ -129,7 +140,7 @@ export class CordovaService {
 
     public getLocation(): Observable<any> {
         return Observable.create((observer: Observer<string>) => {
-        window.navigator.geolocation.getCurrentPosition(
+        _window().navigator.geolocation.getCurrentPosition(
             function (result) {
             observer.next(result);
             },
@@ -144,9 +155,9 @@ export class CordovaService {
 
 
     public openCam() {
-        alert(window.navigator.camera);
+        alert(_window().navigator.camera);
         try {
-        window.navigator.camera.getPicture(function onSuccess() {
+        _window().navigator.camera.getPicture(function onSuccess() {
             console.log("Camera cleanup success.")
         },
             function onFail(message) {
@@ -157,10 +168,3 @@ export class CordovaService {
         }
     }
 }
-
-
-
-
-
-
-

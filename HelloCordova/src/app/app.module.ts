@@ -7,11 +7,17 @@ import { MyNavComponent } from './my-nav/my-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 import { ROUTES } from './app.routes';
+import { CameraComponent } from './camera/camera.component';
+import { GeolocationComponent } from './geolocation/geolocation.component';
+import { CodebarComponent } from './codebar/codebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MyNavComponent
+    MyNavComponent,
+    CameraComponent,
+    GeolocationComponent,
+    CodebarComponent
   ],
   imports: [
     BrowserModule,
